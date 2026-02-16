@@ -1,6 +1,9 @@
 # Build stage
 FROM node:20-alpine AS builder
 
+# Установка OpenSSL для Prisma
+RUN apk add --no-cache openssl openssl-dev
+
 WORKDIR /app
 
 # Копируем файлы зависимостей
@@ -19,6 +22,9 @@ RUN yarn build:docker
 
 # Production stage
 FROM node:20-alpine AS production
+
+# Установка OpenSSL для Prisma
+RUN apk add --no-cache openssl
 
 WORKDIR /app
 
