@@ -1,8 +1,5 @@
-# Build stage
-FROM node:20-slim AS builder
-
-# Установка необходимых пакетов для Prisma
-RUN apt-get update && apt-get install -y openssl ca-certificates && rm -rf /var/lib/apt/lists/*
+# Build stage - используем полный образ где всё уже есть
+FROM node:20-bookworm AS builder
 
 WORKDIR /app
 
@@ -20,11 +17,8 @@ COPY . .
 RUN npx prisma generate
 RUN yarn build:docker
 
-# Production stage
-FROM node:20-slim AS production
-
-# Установка OpenSSL для Prisma
-RUN apt-get update && apt-get install -y openssl ca-certificates && rm -rf /var/lib/apt/lists/*
+# Production stage - используем тот же образ
+FROM node:20-bookworm-slim AS production
 
 WORKDIR /app
 
