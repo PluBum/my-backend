@@ -17,11 +17,8 @@ COPY . .
 RUN npx prisma generate
 RUN yarn build:docker
 
-# Production stage - используем тот же образ
-FROM node:20-bookworm-slim AS production
-
-# Устанавливаем OpenSSL для Prisma
-RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
+# Production stage - используем полный образ с OpenSSL
+FROM node:20-bookworm AS production
 
 WORKDIR /app
 
