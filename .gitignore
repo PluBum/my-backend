@@ -1,0 +1,15 @@
+node_modules/
+build/
+logs/
+.env
+.env.dev
+.env.prod
+.env.production
+.adminjs/
+
+src/app/.notes
+prisma/dev.db
+prisma/*.db
+*.db
+
+.DS_Store

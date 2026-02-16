@@ -1,0 +1,26 @@
+{
+  "entryFile": "src/app.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "bodyCoercion": true,
+  "controllerPathGlobs": ["src/**/*.router.ts"],
+  "esm": true,
+  "spec": {
+    "basePath": "/",
+    "outputDirectory": "tsoa",
+    "specVersion": 3,
+    "securityDefinitions": {
+      "jwt": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "JWT токен авторизации"
+      }
+    }
+  },
+  "routes": {
+    "basePath": "/",
+    "routesDir": "tsoa",
+    "middleware": "express",
+    "authenticationModule": "src/middleware/authentication.ts"
+  }
+}
