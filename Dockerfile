@@ -15,7 +15,7 @@ COPY . .
 
 # Генерируем Prisma Client и собираем проект
 RUN npx prisma generate
-RUN yarn build
+RUN yarn build:docker
 
 # Production stage
 FROM node:20-alpine AS production
