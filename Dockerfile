@@ -1,8 +1,8 @@
 # Build stage
-FROM node:20-alpine AS builder
+FROM node:20-slim AS builder
 
-# Установка OpenSSL для Prisma
-RUN apk add --no-cache openssl openssl-dev
+# Установка необходимых пакетов для Prisma
+RUN apt-get update && apt-get install -y openssl ca-certificates && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
@@ -21,10 +21,10 @@ RUN npx prisma generate
 RUN yarn build:docker
 
 # Production stage
-FROM node:20-alpine AS production
+FROM node:20-slim AS production
 
 # Установка OpenSSL для Prisma
-RUN apk add --no-cache openssl
+RUN apt-get update && apt-get install -y openssl ca-certificates && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
